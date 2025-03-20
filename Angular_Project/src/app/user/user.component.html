@@ -1,0 +1,102 @@
+<div class="container">
+  <!-- Create User Button -->
+  <button class="btn btn-primary" (click)="openModal()">Create New User</button>
+
+  <!-- Modal -->
+  <div class="modal" tabindex="-1" id="createUserModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create New User</h5>
+          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="createUser()">
+            <div class="mb-3">
+              <label for="userName" class="form-label">User Name</label>
+              <input type="text" class="form-control" id="userName" [(ngModel)]="newUser.userName" name="userName" required />
+            </div>
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="firstName" [(ngModel)]="newUser.firstName" name="firstName" required />
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" [(ngModel)]="newUser.lastName" name="lastName" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" [(ngModel)]="newUser.email" name="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="phoneNumber" class="form-label">Phone Number</label>
+              <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="newUser.phoneNumber" name="phoneNumber" required />
+            </div>
+
+            <!-- Multiple Addresses -->
+            <div *ngFor="let address of newUser.addresses; let i = index" class="address-section">
+              <h5>Address {{i + 1}}</h5>
+              <div class="mb-3">
+                <label for="street" class="form-label">Street</label>
+                <input type="text" class="form-control" [(ngModel)]="address.street" name="street{{i}}" required />
+              </div>
+              <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control" [(ngModel)]="address.city" name="city{{i}}" required />
+              </div>
+              <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" class="form-control" [(ngModel)]="address.state" name="state{{i}}" required />
+              </div>
+              <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" class="form-control" [(ngModel)]="address.country" name="country{{i}}" required />
+              </div>
+              <div class="mb-3">
+                <label for="postalCode" class="form-label">Postal Code</label>
+                <input type="text" class="form-control" [(ngModel)]="address.postalCode" name="postalCode{{i}}" required />
+              </div>
+              <!-- Remove Address Button -->
+              <button type="button" class="btn btn-danger" (click)="removeAddress(i)">Remove Address</button>
+            </div>
+
+            <!-- Add New Address Button -->
+            <button type="button" class="btn btn-info" (click)="addAddress()">Add New Address</button>
+
+            <button type="submit" class="btn btn-success">Create User</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>User List</h2>
+
+<div *ngFor="let user of users" class="user-card">
+  <h3>{{ user.userName }} ({{ user.firstName }} {{ user.lastName }})</h3>
+  <p>Email: {{ user.email }}</p>
+  <p>Phone: {{ user.phoneNumber }}</p>
+
+  <h4>Addresses:</h4>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Postal Code</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let address of user.addresses">
+        <td>{{ address.street }}</td>
+        <td>{{ address.city }}</td>
+        <td>{{ address.state }}</td>
+        <td>{{ address.country }}</td>
+        <td>{{ address.postalCode }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

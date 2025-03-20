@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Customer Addresses</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Postal Code</th>
+        <th>UserId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let address of customerAddresses">
+        <td>{{ address.id }}</td>
+        <td>{{ address.street }}</td>
+        <td>{{ address.city }}</td>
+        <td>{{ address.state }}</td>
+        <td>{{ address.country }}</td>
+        <td>{{ address.postalCode }}</td>
+        <td>{{ address.userId.value}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
