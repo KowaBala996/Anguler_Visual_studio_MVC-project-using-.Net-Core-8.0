@@ -77,6 +77,9 @@
   <h3>{{ user.userName }} ({{ user.firstName }} {{ user.lastName }})</h3>
   <p>Email: {{ user.email }}</p>
   <p>Phone: {{ user.phoneNumber }}</p>
+  <p>User Id: {{ user.id }}</p>
+ 
+  
 
   <h4>Addresses:</h4>
   <table class="table table-bordered">
@@ -99,4 +102,6 @@
       </tr>
     </tbody>
   </table>
+  <button class="btn btn-danger" (click)="deleteUser(user.id)">Delete User</button>
+
 </div>

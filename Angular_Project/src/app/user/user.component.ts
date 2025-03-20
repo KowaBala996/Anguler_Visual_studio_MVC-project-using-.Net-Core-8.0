@@ -5,12 +5,11 @@ import { UserService } from '../services/user.service';
   selector: 'app-user',
   standalone: false,
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
   users: any[] = [];
-  newUser: any = { addresses: [] }; // Ensure newUser is defined and has addresses array
-
+  newUser: any = { addresses: [] }; 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -20,7 +19,7 @@ export class UserComponent implements OnInit {
   loadUsers(): void {
     this.userService.getAllUsers().subscribe({
       next: (response) => {
-        this.users = response.result; // Assign response data
+        this.users = response.result; 
       },
       error: (error) => {
         console.error('Error fetching users:', error);
@@ -32,14 +31,29 @@ export class UserComponent implements OnInit {
     this.userService.createUser(this.newUser).subscribe({
       next: (response) => {
         console.log('User created successfully', response);
-        this.loadUsers();  // Refresh the list of users
-        this.closeModal(); // Close the modal after user creation
+        this.loadUsers();  
+        this.closeModal(); 
       },
       error: (error) => {
         console.error('Error creating user', error);
       }
     });
   }
+  deleteUser(userId: string) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.userService.deleteUser(userId).subscribe({
+        next: () => {
+          console.log('User deleted successfully');
+          this.loadUsers();
+        },
+        error: (error) => {
+          console.error('Error deleting user', error);
+        }
+      });
+    }
+  }
+
+
 
   openModal() {
     const modal = document.getElementById('createUserModal');

@@ -13,12 +13,16 @@ export class UserService {
   getAllUsers(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/customer`);
   }
-
-  // Create a user
-  createUser(user: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post<any>(`${this.apiUrl}/CreateUserAsync`, JSON.stringify(user), { headers });
+createUser(user: any): Observable<any> {
+  const headers =  new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
+  return this.http.post<any>(`${this.apiUrl}/CreateUserAsync`, JSON.stringify(user), { headers });
   }
+
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/User/${userId}`);
+  }
+
+
 }

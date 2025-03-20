@@ -133,7 +133,28 @@ namespace Bulky_MVC_Project.Controllers
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+        [HttpDelete]
+        [Route("api/User/{userId}")]
+        public async Task<IActionResult> DeleteUserAsync(Guid userId)
+        {
+            try
+            {
+                var response = await _httpClient.DeleteAsync($"http://localhost:5128/api/User/{userId}");
 
+                if (response.IsSuccessStatusCode)
+                {
+                    return NoContent(); 
+                }
+                else
+                {
+                    return StatusCode((int)response.StatusCode, $"Failed to delete user. Status Code: {response.StatusCode}");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
     }
 }
