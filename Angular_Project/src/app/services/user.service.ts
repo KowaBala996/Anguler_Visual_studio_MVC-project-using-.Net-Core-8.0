@@ -9,11 +9,12 @@ export class UserService {
   private apiUrl = 'https://localhost:7131/api';
 
   constructor(private http: HttpClient) { }
-
+  //getAllUsers
   getAllUsers(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/customer`);
   }
-createUser(user: any): Observable<any> {
+
+  createUser(user: any): Observable<any> {
   const headers =  new HttpHeaders({
     'Content-Type': 'application/json'
   });
